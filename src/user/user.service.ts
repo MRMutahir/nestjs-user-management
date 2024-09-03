@@ -6,7 +6,8 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async createUser(email: string, password: string): Promise<User> {
@@ -22,7 +23,7 @@ export class UserService {
     try {
       return await this.userRepository.findOne({ where: { email } });
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new BadRequestException('invalid email');
     }
   }
 }
